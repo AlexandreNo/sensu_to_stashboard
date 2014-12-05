@@ -31,7 +31,7 @@ for service in services_list['services']:
 			status_url = 'http://%s/admin/api/v1/services/%s' % (base_url, service['id'])
 			response_status = urllib2.urlopen(status_url)
 			status_list = json.loads(response_status.read())
-			if status_list['current-event'].get('status')['id'] != 'down':
+			if status_list['current-event'] == None or status_list['current-event'].get('status')['id'] != 'down':
 				url = 'http://%s/admin/api/v1/services/%s/events' % (base_url, service['id'])
 				values = {'status' : 'down',
         			'message' : 'The service is not running correctly.' }
